@@ -42,4 +42,37 @@ The following animation demonstrates the application functionality:
 
 - Project HTML and CSS provided and not altered (other than to reference new script)
 
+### Logic
+
+```
+Globals
+- Define variable for current date
+- Define array for business hours
+
+Display Current Day
+- Show current date in header
+
+Show Day Planner
+- Create rows for each hour
+- Assign hours to rows
+
+Color Coding
+- Define variable for current time
+- Define past hours - color grey
+- Define current hour - color red
+- Define future hours - color green
+
+Schedule Notes
+- Define rows as user input boxes
+- Create save button for each row
+- Define variable(s) to get user input
+- Associate input with correct hour and save to local storage
+```
+
+### Known Issues
+
+- Save button gets overlapped in XS viewport
+
 ### Deployed Application
+
+next commit:
