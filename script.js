@@ -1,12 +1,19 @@
 // jQuery
 $(function() {});
 
-// set variable for current date/time
-var a = moment();
-console.log(a);
+// get current day & time
+console.log(moment());
 
-// set variable for business hours
-var hours = [
+// set variable for current day
+var today = moment().format("dddd, MMMM Do");
+console.log(today);
+
+// set variable for current hour
+var now = moment().format("H A");
+console.log(now);
+
+// set variable for business busHours
+var busHours = [
 	{ time: 9, period: "AM" },
 	{ time: 10, period: "AM" },
 	{ time: 11, period: "AM" },
@@ -17,29 +24,49 @@ var hours = [
 	{ time: 4, period: "PM" },
 	{ time: 5, period: "PM" }
 ];
-console.log(hours);
+console.log(busHours);
 
-// show current time in header
-$("#currentDay").text(a.format("dddd, MMMM Do"));
+// Header
+// show current day in header
+$("#currentDay").text(today);
 
-// create day planner
-hours.forEach(newRow);
+// Day Planner
+// for each timeblock in business hours create color coded row
+busHours.forEach(function(timeBlock) {
+	// variable for the time block label
+	var timeLabel = timeBlock.time + " " + timeBlock.period;
 
-// function to create each row
-function newRow(currentHour) {
-	console.log(currentHour);
+	// variable for the color of the text area
+	var blockColor = colorMe(timeLabel);
 
-	// variable for the row label in time format
-	var timeLabel = currentHour.time + " " + currentHour.period;
-	console.log(timeLabel);
-
-	// variable for input group including time label and save button
+	// variable for the user entry row including label and save button
 	var row =
-		'<div class="row time-block no-gutters input-group"><div class="col-sm-2 input-group-prepend hour pl-3 pt-2">' +
+		'<div class="time-block" id="' +
+		timeBlock.time +
+		'"><div class="row no-gutters input-group"><div class="col-sm-2 input-group-prepend hour pl-3 pt-2">' +
 		timeLabel +
-		'</div><textarea class="form-control"></textarea><div class="col-sm-2 input-group-append"><button class="saveBtn btn-block" type="submit"><i class="far fa-save"></i></button></div></div>';
+		'</div><textarea class="form-control ' +
+		blockColor +
+		'"></textarea><div class="col-sm-2 input-group-append"><button class="saveBtn btn-block" type="submit"><i class="far fa-save"></i></button></div></div></div>';
+
+	// show timeblock rows
 	$(".container").append(row);
+});
+
+// function for color coding
+function colorMe(time) {
+	// variables to compare timeblock time to current time
+	var testNow = moment(now, "H A");
+	var testBlock = moment(time, "H A");
+
+	// return color style for timeblock
+	if (testNow.isBefore(testBlock) === true) {
+		return "future";
+	} else if (testNow.isAfter(testBlock) === true) {
+		return "past";
+	} else {
+		return "present";
+	}
 }
 
 // what is .description intended for?
-// is .time-block used with .row or somewhere else?

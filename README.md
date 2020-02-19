@@ -46,21 +46,21 @@ The following animation demonstrates the application functionality:
 
 ```
 Globals
-- Define variable for current date
+- Create variable for current day (from Moment)
+- Create variable for current hour (from Moment)
 - Define array for business hours
 
 Display Current Day
-- Show current date in header
+- Show current day in header
 
-Show Day Planner
-- Create rows for each hour
-- Assign hours to rows
-
-Color Coding
-- Define variable for current time
-- Define past hours - color grey
-- Define current hour - color red
-- Define future hours - color green
+Day Planner
+- Create timeblock for each hour with unique ID
+- Create row for each hour with time label and save button
+- Create color coding by comparing time block to current time
+	- Define past hours - color grey
+	- Define current hour - color red
+	- Define future hours - color green
+- Show timeblocks
 
 Schedule Notes
 - Define rows as user input boxes
@@ -72,6 +72,7 @@ Schedule Notes
 ### Known Issues
 
 - Save button gets overlapped in XS viewport
+- Business hours object array could be simplified to string array
 
 ### Deployed Application
 
