@@ -40,39 +40,44 @@ The following animation demonstrates the application functionality:
 
 ## Development Notes
 
-- Project HTML and CSS provided and not altered (other than to reference new script)
+Project HTML and CSS provided and not altered (other than to reference new script)
 
-### Logic
+### Script Logic
 
 ```
 Globals
 - Create variable for current day (from Moment)
 - Create variable for current hour (from Moment)
-- Define array for business hours
+- Define object array for day planner
+	- Get previously defined array from local storage (if exists)
 
 Display Current Day
 - Show current day in header
 
 Day Planner
-- Create timeblock for each hour with unique ID
-- Create row for each hour with time label and save button
+- Create time block for each hour with unique ID
+- Create row for each hour
+	- Define time label
+	- Define user entry box
+	- Put events in entry box
+	- Define save button
 - Create color coding by comparing time block to current time
 	- Define past hours - color grey
 	- Define current hour - color red
 	- Define future hours - color green
-- Show timeblocks
+- Show time blocks
 
-Schedule Notes
-- Define rows as user input boxes
-- Create save button for each row
-- Define variable(s) to get user input
-- Associate input with correct hour and save to local storage
+User Entries
+- Get user entry when saved button is clicked
+- Define variable for target time block
+- Define variable for user input
+- Add user input to day planner array
+- Update local storage
 ```
 
 ### Known Issues
 
 - Save button gets overlapped in XS viewport
-- Business hours object array could be simplified to string array
 
 ### Deployed Application
 

@@ -12,19 +12,29 @@ console.log(today);
 var now = moment().format("H A");
 console.log(now);
 
-// set variable for business busHours
-var busHours = [
-	{ time: 9, period: "AM" },
-	{ time: 10, period: "AM" },
-	{ time: 11, period: "AM" },
-	{ time: 12, period: "PM" },
-	{ time: 1, period: "PM" },
-	{ time: 2, period: "PM" },
-	{ time: 3, period: "PM" },
-	{ time: 4, period: "PM" },
-	{ time: 5, period: "PM" }
+// set variable for day planner
+// time must be in "H A" format
+var planDay = [
+	{ time: "9 AM", event: "" },
+	{ time: "10 AM", event: "something to do" },
+	{ time: "11 AM", event: "" },
+	{ time: "12 PM", event: "" },
+	{ time: "1 PM", event: "" },
+	{ time: "2 PM", event: "" },
+	{ time: "3 PM", event: "now what?" },
+	{ time: "4 PM", event: "" },
+	{ time: "5 PM", event: "" }
 ];
-console.log(busHours);
+console.log(planDay);
+
+// check local storage for previous saved day planner
+var checkPrevious = JSON.parse(localStorage.getItem("dayPlanner"));
+
+// get previously saved day planner from local storage (if exists)
+if (checkPrevious !== null) {
+	planDay = checkPrevious;
+}
+console.log(planDay);
 
 // Header
 // show current day in header
@@ -32,22 +42,24 @@ $("#currentDay").text(today);
 
 // Day Planner
 // for each timeblock in business hours create color coded row
-busHours.forEach(function(timeBlock) {
+planDay.forEach(function(timeBlock, index) {
 	// variable for the time block label
-	var timeLabel = timeBlock.time + " " + timeBlock.period;
+	var timeLabel = timeBlock.time;
 
 	// variable for the color of the text area
 	var blockColor = colorMe(timeLabel);
 
-	// variable for the user entry row including label and save button
+	// variable for the user entry row including label, user event, and save button
 	var row =
 		'<div class="time-block" id="' +
-		timeBlock.time +
+		index +
 		'"><div class="row no-gutters input-group"><div class="col-sm-2 input-group-prepend hour pl-3 pt-2">' +
 		timeLabel +
 		'</div><textarea class="form-control ' +
 		blockColor +
-		'"></textarea><div class="col-sm-2 input-group-append"><button class="saveBtn btn-block" type="submit"><i class="far fa-save"></i></button></div></div></div>';
+		'">' +
+		timeBlock.event +
+		'</textarea><div class="col-sm-2 input-group-append"><button class="saveBtn btn-block" type="submit"><i class="far fa-save"></i></button></div></div></div>';
 
 	// show timeblock rows
 	$(".container").append(row);
@@ -69,4 +81,33 @@ function colorMe(time) {
 	}
 }
 
+// User Entries
+// when save button is clicked
+$(".saveBtn").on("click", function(event) {
+	// variable for ID of target time block
+	var blockID = parseInt(
+		$(this)
+			.closest(".time-block")
+			.attr("id")
+	);
+	console.log(blockID);
+
+	// variable for user entry in target timeblock
+	var userEntry = $.trim(
+		$(this)
+			.parent()
+			.siblings("textarea")
+			.val()
+	);
+	console.log(userEntry);
+
+	// save user event in day planner array at target index
+	planDay[blockID].event = userEntry;
+	console.log(planDay);
+
+	// save updated day planner to local storage
+	localStorage.setItem("dayPlanner", JSON.stringify(planDay));
+});
+
 // what is .description intended for?
+// how to apply hover?
