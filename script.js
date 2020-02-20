@@ -1,31 +1,25 @@
 // jQuery
 $(function() {});
 
-// get current day & time
-console.log(moment());
-
 // set variable for current day
 var today = moment().format("dddd, MMMM Do");
-console.log(today);
 
 // set variable for current hour
 var now = moment().format("H A");
-console.log(now);
 
 // set variable for day planner
 // time must be in "H A" format
 var planDay = [
 	{ time: "9 AM", event: "" },
-	{ time: "10 AM", event: "something to do" },
+	{ time: "10 AM", event: "" },
 	{ time: "11 AM", event: "" },
 	{ time: "12 PM", event: "" },
 	{ time: "1 PM", event: "" },
 	{ time: "2 PM", event: "" },
-	{ time: "3 PM", event: "now what?" },
+	{ time: "3 PM", event: "" },
 	{ time: "4 PM", event: "" },
 	{ time: "5 PM", event: "" }
 ];
-console.log(planDay);
 
 // check local storage for previous saved day planner
 var checkPrevious = JSON.parse(localStorage.getItem("dayPlanner"));
@@ -34,7 +28,6 @@ var checkPrevious = JSON.parse(localStorage.getItem("dayPlanner"));
 if (checkPrevious !== null) {
 	planDay = checkPrevious;
 }
-console.log(planDay);
 
 // Header
 // show current day in header
@@ -53,13 +46,13 @@ planDay.forEach(function(timeBlock, index) {
 	var row =
 		'<div class="time-block" id="' +
 		index +
-		'"><div class="row no-gutters input-group"><div class="col-sm-2 input-group-prepend hour pl-3 pt-2">' +
+		'"><div class="row no-gutters input-group"><div class="col-sm-2 col-lg-1 input-group-prepend hour justify-content-sm-end pr-3 pt-3">' +
 		timeLabel +
 		'</div><textarea class="form-control ' +
 		blockColor +
 		'">' +
 		timeBlock.event +
-		'</textarea><div class="col-sm-2 input-group-append"><button class="saveBtn btn-block" type="submit"><i class="far fa-save"></i></button></div></div></div>';
+		'</textarea><div class="col-sm-2 col-lg-1 input-group-append"><button class="saveBtn btn-block" type="submit"><i class="far fa-save"></i></button></div></div></div>';
 
 	// show timeblock rows
 	$(".container").append(row);
@@ -90,7 +83,6 @@ $(".saveBtn").on("click", function(event) {
 			.closest(".time-block")
 			.attr("id")
 	);
-	console.log(blockID);
 
 	// variable for user entry in target timeblock
 	var userEntry = $.trim(
@@ -99,15 +91,10 @@ $(".saveBtn").on("click", function(event) {
 			.siblings("textarea")
 			.val()
 	);
-	console.log(userEntry);
 
 	// save user event in day planner array at target index
 	planDay[blockID].event = userEntry;
-	console.log(planDay);
 
 	// save updated day planner to local storage
 	localStorage.setItem("dayPlanner", JSON.stringify(planDay));
 });
-
-// what is .description intended for?
-// how to apply hover?

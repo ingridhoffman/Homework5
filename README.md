@@ -78,7 +78,8 @@ User Entries
 ### Known Issues
 
 - Save button gets overlapped in XS viewport
+- "decription" class not applied due to lack of clarity of what it is for
 
 ### Deployed Application
 
-next commit:
+https://ingridhoffman.github.io/Homework5/
