@@ -40,7 +40,10 @@ The following animation demonstrates the application functionality:
 
 ## Development Notes
 
-Project HTML and CSS provided and not altered (other than to reference new script)
+Project HTML and CSS provided
+
+- Added reference to script (HTML)
+- Added bottom margin to page (CSS)
 
 ### Script Logic
 
@@ -78,7 +81,6 @@ User Entries
 ### Known Issues
 
 - Save button gets overlapped in XS viewport
-- "decription" class not applied due to lack of clarity of what it is for
 
 ### Deployed Application
 
