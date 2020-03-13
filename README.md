@@ -1,6 +1,6 @@
-# Homework5
+# Workday Scheduler
 
-Work Day Scheduler
+Homework #5: Basic Scheduler
 
 ## Assignment
 
@@ -84,4 +84,4 @@ User Entries
 
 ### Deployed Application
 
-https://ingridhoffman.github.io/Homework5/
+https://ingridhoffman.github.io/WorkdayScheduler/
